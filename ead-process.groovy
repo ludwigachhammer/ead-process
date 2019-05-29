@@ -61,18 +61,18 @@ node {
     
     deleteDir()
     
-    /*
+    
     stage('Sources') {
         checkout([
                 $class           : 'GitSCM',
                 branches         : [[name: "refs/heads/master"]],
                 extensions       : [[$class: 'CleanBeforeCheckout', localBranch: "master"]],
                 userRemoteConfigs: [[                     
-                    url          : "https://github.com/ludwigachhammer/Microservice2"
+                    url          : "https://github.com/ludwigachhammer/ead-process"
                                     ]]
                 ])
     }
-    */
+    
 
     dir("C:/Program Files (x86)/Jenkins/workspace/simplebuild") {
         stage("Validating Config"){
