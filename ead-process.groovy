@@ -78,7 +78,8 @@ node {
         stage("Validating Config"){
             //TODO
             //Validate jira link in links.config
-            def currentDir = new File(".").absolutePath
+            echo "Paramter: ${env.workdir}"
+		def currentDir = new File(".").absolutePath
             echo "Debugg: ${currentDir}"
             env.WORKSPACE = pwd() // present working directory.
             def file = readFile "${env.WORKSPACE}/links.config"
