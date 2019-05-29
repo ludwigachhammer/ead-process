@@ -74,7 +74,7 @@ node {
     }
     
 
-    dir(env.workdir) {
+	dir(${env.workdir}) {
         stage("Validating Config"){
             //TODO
             //Validate jira link in links.config
