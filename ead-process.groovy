@@ -74,11 +74,11 @@ node {
     }
     
 
-	dir(${env.workdir}) {
+	dir(${env.WORKDIR}) {
         stage("Validating Config"){
             //TODO
             //Validate jira link in links.config
-            echo "Paramter: ${env.workdir}"
+            echo "Paramter: ${env.WORKDIR}"
 		def currentDir = new File(".").absolutePath
             echo "Debugg: ${currentDir}"
             env.WORKSPACE = pwd() // present working directory.
