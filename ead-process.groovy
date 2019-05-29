@@ -35,16 +35,6 @@ def callGetJira(String urlString) {
     }
 }
 
-/*
-def jsonBuilder(JSON_parts) {
-	def string = "################################### test #####################################"
-	def JSON_full = ""
-	echo "JSON_parts: ${JSON_parts}"
-	echo "JSON_full: ${JSON_full}"
-	echo "Return: ${string}"
-}
-*/
-
 node {
     
     // GLOBAL VARIABLES
@@ -57,7 +47,6 @@ node {
 	
 	//newly added
 	def ORG_NAME = "ead-tool"
-	def JSON_parts = new String[7]
     
     deleteDir()
     
@@ -106,12 +95,7 @@ node {
             LINKS = LINKS.substring(0, (LINKS.length())-1)//remove last coma
             echo LINKS
         }
-        
-        /*
-        stage("Build"){
-            bat "gradlew build"
-        }
-        */
+     
         
         stage("Get Basic Jira Information"){
             //GET http://jira-url:port/rest/api/2/project/{projectIdOrKey}
@@ -120,6 +104,7 @@ node {
             BASIC_INFO = "\"id\": \""+"1234"+"\", \"key\":\""+"a1b2"+"\", \"name\": \""+"mock-microservice2"+"\", \"owner\": \""+"leader"+"\", \"description\": \""+"testdescription"+"\", \"short_name\": \""+"abc"+"\", \"type\": \""+"microservice"+"\","
             echo "BASIC INFO: ${BASIC_INFO}"
         }
+		
         stage("Get Business Jira Information"){
             // customfield_10007: Domain
             // customfield_10008: Subdomain
@@ -151,29 +136,6 @@ node {
             //BUSINESS_INFO = " \"domain\": \"${domains[0]}\", \"subdomain\": \"${subdomains[0]}\", \"product\": \"${products[0]}\" " 
             BUSINESS_INFO = " \"domain\": \"drumset\", \"subdomain\": \"cymbals\", \"product\": \"crashride\" " 
         }
-        
-        /*
-        stage('Deploy') {
-            def branch = ['master']
-            def path = "build/libs/gs-spring-boot-0.1.0.jar"
-            def manifest = "manifest.yml"
-            echo '\"'+'$CF_PASSWORD'+'\"'
-            
-               if (manifest == null) {
-                throw new RuntimeException('Could not map branch ' + master + ' to a manifest file')
-               }
-               withCredentials([[
-                                     $class          : 'UsernamePasswordMultiBinding',
-                                     credentialsId   : '05487704-f456-43cb-96c3-72aaffdba62f',
-                                     usernameVariable: 'CF_USERNAME',
-                                     passwordVariable: 'CF_PASSWORD'
-                             ]]) {
-                bat "cf login -a https://api.run.pivotal.io -u $CF_USERNAME -p \"$CF_PASSWORD\" --skip-ssl-validation"
-                bat 'cf target -o ead-tool -s development'
-                bat 'cf push '+NAME+' -f '+manifest+' --hostname '+NAME+' -p '+path
-            }
-        }
-        */
         
         
         stage("Get Runtime Information"){
