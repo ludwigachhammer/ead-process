@@ -81,8 +81,8 @@ node {
             echo "Paramter: ${env.WORKDIR}"
 		def currentDir = new File(".").absolutePath
             echo "Debugg: ${currentDir}"
-            env.WORKSPACE = pwd() // present working directory.
-            def file = readFile "${env.WORKSPACE}/links.config"
+            //env.WORKSPACE = pwd() // present working directory.
+            def file = readFile "${env.WORKDIR}/links.config"
 		
             def trimmedText = file.trim().replaceAll("\\r\\n|\\r|\\n", " ").replaceAll(" +",";").split(";")
             echo "trimmedText: ${trimmedText}"
